@@ -75,7 +75,7 @@
 
                 function getColor(flujo) {
                     //console.log(flujo);    
-                    if (flujo <= 2 && flujo > 0) {
+                    if (flujo <= 2 && flujo >= 0) {
                         return "green";
                     } else if (flujo < 2.5 && flujo > 2) {
                         return "blue";
