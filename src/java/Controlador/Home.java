@@ -28,10 +28,14 @@ public class Home extends HttpServlet {
         ArrayList<String> mediHor = new ArrayList<String>();
         ArrayList<String> mediVer = new ArrayList<String>();
         ArrayList<String> serializados = new ArrayList<String>();
-        String path = System.getProperty("user.dir");
+
         try {
-            mediHor = CSV.deserializarCSV("C:\\Users\\cvidalse\\Desktop\\Estructura\\ProyectoEstructura\\ProyectoEstructura\\Prom_Horizontales.csv");
-            mediVer = CSV.deserializarCSV("C:\\Users\\cvidalse\\Desktop\\Estructura\\ProyectoEstructura\\ProyectoEstructura\\Prom_Verticales.csv");
+            //mediHor = CSV.deserializarCSV("C:\\Users\\cvidalse\\Desktop\\Estructura\\ProyectoEstructura\\ProyectoEstructura\\Prom_Horizontales.csv");
+            //mediVer = CSV.deserializarCSV("C:\\Users\\cvidalse\\Desktop\\Estructura\\ProyectoEstructura\\ProyectoEstructura\\Prom_Verticales.csv");
+            
+            mediHor = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Horizontales.csv");
+            mediVer = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Verticales.csv");
+            
             serializados.addAll(mediHor);
             serializados.addAll(mediVer);
         } catch (Exception ex) {
