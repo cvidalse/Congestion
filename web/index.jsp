@@ -76,9 +76,9 @@
                 }
 
                 function getColor(flujo) {
-                    //console.log(flujo);    
                     if (flujo <= 2 && flujo > 0 && document.getElementById("verde").checked) {
-                        return "green";
+
+                         return "green";
                     } else if (flujo < 2.5 && flujo > 2 && document.getElementById("azul").checked) {
                         return "blue";
                     } else if (flujo >= 2.5 && document.getElementById("rojo").checked) {
