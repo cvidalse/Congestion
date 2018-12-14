@@ -27,7 +27,7 @@
                 crossorigin="anonymous">
 
         </script>
-        
+
     </head>
 
     <body bgcolor="solid green">
@@ -40,7 +40,7 @@
             var baseData = ${datos};
         </script>
 
-        <div class=centrado id="mapid" style="width: 1300px; height: 700px;vertical-align:top"></div>
+        <div class=centrado id="mapid" style="width: 1300px; height: 500px;vertical-align:top"></div>
         <style type='text/css'>
             .centrado {
                 display: block;
@@ -50,7 +50,7 @@
 
             <script>
 
-                var mymap = L.map('mapid').setView([-38.736277, -72.590618], 16);
+                var mymap = L.map('mapid').setView([-38.736349, -72.588495], 16);
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href=”http://osm.org/copyright”>OpenStreetMap</a> contributors'
                 }).addTo(mymap);
@@ -78,15 +78,15 @@
                 function getColor(flujo) {
                     if (flujo <= 2 && flujo > 0 && document.getElementById("verde").checked) {
 
-                         return "green";
+                        return "green";
                     } else if (flujo < 2.5 && flujo > 2 && document.getElementById("azul").checked) {
                         return "blue";
                     } else if (flujo >= 2.5 && document.getElementById("rojo").checked) {
                         return "red";
                     } else if (flujo == -0.33333) {
                         return "black";
-                    }else{
-                        return "white";          
+                    } else {
+                        return "white";
                     }
                 }
 
@@ -132,7 +132,7 @@
             </script>
 
 
-        <style>  
+            <style>  
             .legend {
                 border: 3px solid black;
                 font-weight: bold;
@@ -172,6 +172,10 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
+                position: absolute;
+                top: 50px;
+                right: 530px;
+                border: 3px solid green;
             }
         </style>
 </html>
