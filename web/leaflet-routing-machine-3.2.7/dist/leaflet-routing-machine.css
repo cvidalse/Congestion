@@ -5,8 +5,10 @@
     transition: all 0.2s ease;
     box-sizing: border-box;
 }
+
 .leaflet-control-container .leaflet-routing-container-hide {
-    display: none;
+    width: 32px;
+    height: 32px;
 }
 
 .leaflet-routing-container h2 {
@@ -218,7 +220,6 @@
 .leaflet-routing-collapse-btn:after {
     content: '\00d7';
 }
-
 
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn {
     position: relative;

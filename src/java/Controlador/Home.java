@@ -33,8 +33,8 @@ public class Home extends HttpServlet {
             mediHor = CSV.deserializarCSV("C:\\Users\\cvidalse\\Desktop\\Estructura\\ProyectoEstructura\\ProyectoEstructura\\Prom_Horizontales.csv");
             mediVer = CSV.deserializarCSV("C:\\Users\\cvidalse\\Desktop\\Estructura\\ProyectoEstructura\\ProyectoEstructura\\Prom_Verticales.csv");
             
-//            mediHor = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Horizontales.csv");
-//            mediVer = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Verticales.csv");
+           //mediHor = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Horizontales.csv");
+           //mediVer = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Verticales.csv");
 //            
             serializados.addAll(mediHor);
             serializados.addAll(mediVer);
