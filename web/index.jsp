@@ -27,13 +27,15 @@
                 crossorigin="anonymous">
 
         </script>
-
+        
     </head>
 
     <body bgcolor="solid green">
 
         <h2 align="center">Centro de Temuco en Horarios Punta</h2> 
-
+        <label><input type="checkbox" id="rojo" value="first_checkbox" checked=""> Rojo </label>
+        <label><input type="checkbox" id="verde" value="first_checkbox" checked=""> Verde </label>
+        <label><input type="checkbox" id="azul" value="first_checkbox" checked=""> Azul </label>
         <script>
             var baseData = ${datos};
         </script>
@@ -75,14 +77,16 @@
 
                 function getColor(flujo) {
                     //console.log(flujo);    
-                    if (flujo <= 2 && flujo > 0) {
+                    if (flujo <= 2 && flujo > 0 && document.getElementById("verde").checked) {
                         return "green";
-                    } else if (flujo < 2.5 && flujo > 2) {
+                    } else if (flujo < 2.5 && flujo > 2 && document.getElementById("azul").checked) {
                         return "blue";
-                    } else if (flujo >= 2.5) {
+                    } else if (flujo >= 2.5 && document.getElementById("rojo").checked) {
                         return "red";
                     } else if (flujo == -0.33333) {
                         return "black";
+                    }else{
+                        return "white";          
                     }
                 }
 
