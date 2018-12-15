@@ -4,7 +4,7 @@
 <html>
     <head>
 
-        <title> CongestionTemuco</title>
+        <title>Evita el Taco</title>
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,23 +32,51 @@
 
     <body bgcolor="solid green">
 
-        <h2 align="center">Centro de Temuco en Horarios Punta</h2> 
-        <label><input type="checkbox" id="rojo" value="first_checkbox" checked=""> Rojo </label>
-        <label><input type="checkbox" id="verde" value="first_checkbox" checked=""> Verde </label>
-        <label><input type="checkbox" id="azul" value="first_checkbox" checked=""> Azul </label>
         <script>
             var baseData = ${datos};
         </script>
-
-        <div class=centrado id="mapid" style="width: 1300px; height: 500px;vertical-align:top"></div>
+        
+        <h2 align="center">Evita el Taco</h2> 
+        
+        <div class="botoneraCentrada">
+            <button onclick="procesarMapa(5)">Horario 07-08</button>
+            <button onclick="procesarMapa(6)">Horario 13-14</button>
+            <button onclick="procesarMapa(7)">Horario 18-19</button>
+        </div>
         <style type='text/css'>
-            .centrado {
+            .botoneraCentrada{
+                margin: auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                padding: 5px;
+            }
+        </style>
+        
+        <div class="checkboxCentrados">
+            <label><input type="checkbox" id="rojo" value="first_checkbox" checked=""> Rojo </label>
+            <label><input type="checkbox" id="verde" value="first_checkbox" checked=""> Verde </label>
+            <label><input type="checkbox" id="azul" value="first_checkbox" checked=""> Azul </label>
+        </div>
+        <style type='text/css'>
+            .checkboxCentrados {
+                margin: auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                padding: 5px;
+            }
+        </style>
+
+        <div class=mapaCentrado id="mapid" style="width: 1300px; height: 500px;vertical-align:top"></div>
+        <style type='text/css'>
+            .mapaCentrado {
                 display: block;
                 margin-right:auto;
-                margin-left: auto;  }
-            </style>
-
-            <script>
+                margin-left: auto;
+            }
+        </style>
+        <script>
 
                 var mymap = L.map('mapid').setView([-38.736349, -72.588495], 16);
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -130,8 +158,6 @@
 
 
             </script>
-
-
             <style>  
             .legend {
                 border: 3px solid black;
@@ -159,23 +185,5 @@
                 height: 50px;
                 margin-top: 8px;
             } 
-        </style>
-
-        <div class="botoneraCentrada">
-            <button onclick="procesarMapa(5)" >Horario 07-08</button>
-            <button onclick="procesarMapa(6)">Horario 13-14</button>
-            <button onclick="procesarMapa(7)">Horario 18-19</button>
-        </div>
-        <style type='text/css'>
-            .botoneraCentrada{
-                margin: auto;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                position: absolute;
-                top: 50px;
-                right: 530px;
-                border: 3px solid green;
-            }
         </style>
 </html>

@@ -35,7 +35,7 @@ public class Home extends HttpServlet {
             
            //mediHor = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Horizontales.csv");
            //mediVer = CSV.deserializarCSV((System.getProperty("user.dir"))+"/Prom_Verticales.csv");
-//            
+            
             serializados.addAll(mediHor);
             serializados.addAll(mediVer);
         } catch (Exception ex) {
