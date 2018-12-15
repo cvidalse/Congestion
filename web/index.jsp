@@ -97,6 +97,7 @@
                         styles: [{color: color, opacity: 1, weight: 5}]
                     },
                     fitSelectedRoutes: false,
+                    addWaypoints: false,
                     show: false
 
                 }).addTo(mymap);
