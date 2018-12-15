@@ -35,9 +35,9 @@
         <script>
             var baseData = ${datos};
         </script>
-        
+
         <h2 align="center">Evita el Taco</h2> 
-        
+
         <div class="botoneraCentrada">
             <button onclick="procesarMapa(5)">Horario 07-08</button>
             <button onclick="procesarMapa(6)">Horario 13-14</button>
@@ -52,7 +52,7 @@
                 padding: 5px;
             }
         </style>
-        
+
         <div class="checkboxCentrados">
             <label><input type="checkbox" id="rojo" value="first_checkbox" checked=""> Rojo </label>
             <label><input type="checkbox" id="verde" value="first_checkbox" checked=""> Verde </label>
@@ -63,7 +63,6 @@
                 margin: auto;
                 display: flex;
                 flex-direction: row;
-                justify-content: center;
                 padding: 5px;
             }
         </style>
@@ -78,87 +77,100 @@
         </style>
         <script>
 
-                var mymap = L.map('mapid').setView([-38.736349, -72.588495], 16);
-                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href=”http://osm.org/copyright”>OpenStreetMap</a> contributors'
+            var mymap = L.map('mapid').setView([-38.736349, -72.588495], 16);
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href=”http://osm.org/copyright”>OpenStreetMap</a> contributors'
+            }).addTo(mymap);
+            //newMap.fitBounds(datalayer.getBounds());
+
+            function trazarEnMapa(pos1, pos2, pos3, pos4, color) {
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(pos1, pos2),
+                        L.latLng(pos3, pos4)
+                    ],
+                    routeWhileDragging: true,
+                    createMarker: function () {
+                        return null;
+                    },
+                    lineOptions: {
+                        styles: [{color: color, opacity: 1, weight: 5}]
+                    },
+                    fitSelectedRoutes: false,
+                    show: false
+
                 }).addTo(mymap);
-                //newMap.fitBounds(datalayer.getBounds());
+            }
 
-                function trazarEnMapa(pos1, pos2, pos3, pos4, color) {
-                    L.Routing.control({
-                        waypoints: [
-                            L.latLng(pos1, pos2),
-                            L.latLng(pos3, pos4)
-                        ],
-                        routeWhileDragging: true,
-                        createMarker: function () {
-                            return null;
-                        },
-                        lineOptions: {
-                            styles: [{color: color, opacity: 1, weight: 5}]
-                        },
-                        fitSelectedRoutes: false,
-                        show: false
+            function getColor(flujo) {
+                if (flujo <= 2 && flujo > 0 && document.getElementById("verde").checked) {
 
-                    }).addTo(mymap);
+                    return "green";
+                } else if (flujo < 2.5 && flujo > 2 && document.getElementById("azul").checked) {
+                    return "blue";
+                } else if (flujo >= 2.5 && document.getElementById("rojo").checked) {
+                    return "red";
+                } else if (flujo == -0.33333) {
+                    return "black";
+                } else {
+                    return "white";
                 }
+            }
 
-                function getColor(flujo) {
-                    if (flujo <= 2 && flujo > 0 && document.getElementById("verde").checked) {
 
-                        return "green";
-                    } else if (flujo < 2.5 && flujo > 2 && document.getElementById("azul").checked) {
-                        return "blue";
-                    } else if (flujo >= 2.5 && document.getElementById("rojo").checked) {
-                        return "red";
-                    } else if (flujo == -0.33333) {
-                        return "black";
-                    } else {
-                        return "white";
-                    }
+            function getColors(flujo) {
+                if (flujo <= 2 && flujo > 0) {
+                    return "green";
+                } else if (flujo < 2.5 && flujo > 2) {
+                    return "blue";
+                } else if (flujo >= 2.5) {
+                    return "red";
+                } else if (flujo == -0.33333) {
+                    return "black";
                 }
+            }
 
-                function procesarMapa(valor) {
-                    var textoCompleto = JSON.stringify(baseData);
-                    var lineas = textoCompleto.split("},");
+            function procesarMapa(valor) {
+                var textoCompleto = JSON.stringify(baseData);
+                var lineas = textoCompleto.split("},");
 
-                    for (var i in lineas) {
-                        var temp = lineas[i].replace(/[\[\]{:}'"a-zA-Z\s]+/g, "");
+                for (var i in lineas) {
+                    var temp = lineas[i].replace(/[\[\]{:}'"a-zA-Z\s]+/g, "");
 
-                        var temp2 = temp.split(",");
+                    var temp2 = temp.split(",");
 
-                        var color = getColor(parseFloat(temp2[valor]));
+                    var color = getColor(parseFloat(temp2[valor]));
 
-                        trazarEnMapa(parseFloat(temp2[0]), parseFloat(temp2[1]), parseFloat(temp2[2]), parseFloat(temp2[3]), color);
-                    }
+                    trazarEnMapa(parseFloat(temp2[0]), parseFloat(temp2[1]), parseFloat(temp2[2]), parseFloat(temp2[3]), color);
                 }
+            }
 
-                //Leyenda
+            //Leyenda
 
-                var legend = L.control({position: 'bottomright'});
-                legend.onAdd = function (mymap) {
+            var legend = L.control({position: 'bottomright'});
+            legend.onAdd = function (mymap) {
 
-                    var div = L.DomUtil.create('div', 'info legend');
-                    labels = ['<strong>Promedio vehiculos por minuto</strong>'],
-                            categories = ['Menos de 2', 'Entre 2 y 2.5', 'Más de 2.5', 'Sólo locomoción colectiva'];
-                    colors = [2, 2.3, 3, -0.33333];
+                var div = L.DomUtil.create('div', 'info legend');
+                labels = ['<strong>Promedio vehiculos por minuto</strong>'],
+                        categories = ['Menos de 2', 'Entre 2 y 2.5', 'Más de 2.5', 'Sólo locomoción colectiva'];
+                colors = [2, 2.3, 3, -0.33333];
 
-                    for (var i = 0; i < categories.length; i++) {
-                        div.innerHTML +=
-                                labels.push(
-                                        '<i class="circle" style="background:' + getColor(colors[i]) + '"></i> ' +
-                                        (categories[i] ? categories[i] : '+'));
-                        console.log(getColor(categories[i]));
-                    }
-                    div.innerHTML = labels.join('<br>');
-                    return div;
-                };
-                legend.addTo(mymap);
+                for (var i = 0; i < categories.length; i++) {
+                    div.innerHTML +=
+                            labels.push(
+                                    '<i class="circle" style="background:' + getColors(colors[i]) + '"></i> ' +
+                                    (categories[i] ? categories[i] : '+'));
+                    console.log(getColors(categories[i]));
+                }
+                div.innerHTML = labels.join('<br>');
+                return div;
+            };
+            legend.addTo(mymap);
 
 
 
-            </script>
-            <style>  
+        </script>
+        <style>  
             .legend {
                 border: 3px solid black;
                 font-weight: bold;
